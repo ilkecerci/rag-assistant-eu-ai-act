@@ -1,0 +1,21 @@
+id,type,lang,question,retrieved_pages,retrieved_sections,expected,hit,body_share
+1,in_scope,en,Which AI practices are prohibited?,"[51, 51, 46, 127, 92]",AAAXA,Article 5 (p.51-53),True,1.0
+2,in_scope,en,When do the prohibitions on AI practices start to apply?,"[51, 121, 51, 46, 82]",AAAAA,Article 113 (p.123-124),False,1.0
+3,in_scope,en,What is the maximum fine for engaging in prohibited AI practices?,"[51, 116, 108, 51, 117]",AAAAA,Article 99 (p.115-116),True,1.0
+4,in_scope,en,What must providers of high-risk AI systems do about risk management?,"[62, 57, 61, 56, 56]",AAAAA,Article 9 (p.56-57),True,1.0
+5,in_scope,en,What requirements apply to the training data of high-risk AI systems?,"[61, 57, 60, 61, 77]",AAAAA,Article 10 (p.57-58),True,1.0
+6,in_scope,en,What must the technical documentation of a high-risk AI system contain?,"[135, 58, 60, 135, 63]",XAAXA,"Article 11 (p.58-59), Annex IV (p.130-132)",True,1.0
+7,in_scope,en,How must high-risk AI systems allow for human oversight?,"[60, 68, 60, 60, 60]",AAAAA,Article 14 (p.60-61),True,1.0
+8,in_scope,en,Must people be told that they are interacting with an AI system such as a chatbot?,"[93, 82, 55, 129, 51]",AAAXA,Article 50 (p.82-83),True,1.0
+9,in_scope,en,What obligations do providers of general-purpose AI models have?,"[85, 84, 86, 86, 86]",AAAAA,Article 53 (p.84-85),True,1.0
+10,in_scope,en,How does the AI Act define an AI system?,"[46, 82, 127, 67, 136]",AAXAX,Article 3 (p.46-51),True,1.0
+11,in_scope,en,Which areas are listed as high-risk AI use cases?,"[127, 57, 53, 61, 54]",XAAAA,"Article 6 (p.53-54), Annex III (p.127-130)",True,1.0
+12,in_scope,en,"Who must ensure AI literacy, and what does it involve?","[87, 82, 113, 51, 49]",AAAAA,Article 4 (p.51-51),True,1.0
+13,in_scope,en,What is an AI regulatory sandbox?,"[88, 49, 89, 89, 89]",AAAAA,Article 57 (p.88-90),True,1.0
+14,in_scope,en,When is a general-purpose AI model considered to have systemic risk?,"[83, 50, 86, 84, 84]",AAAAA,Article 51 (p.83-83),True,1.0
+15,in_scope,tr,Yüksek riskli yapay zeka sistemlerinde insan gözetimi nasıl sağlanmalı?,"[60, 60, 68, 60, 60]",AAAAA,Article 14 (p.60-61),True,1.0
+16,in_scope,tr,Deepfake içeriklerin yapay zeka ile üretildiği belirtilmek zorunda mı?,"[82, 50, 82, 60, 47]",AAAAA,Article 50 (p.82-83),True,1.0
+17,in_scope,tr,Yasaklı yapay zeka uygulamaları için en yüksek para cezası nedir?,"[46, 117, 46, 116, 89]",AAAAA,Article 99 (p.115-116),True,1.0
+18,out_of_scope,en,What is the best pizza recipe?,"[126, 141, 68, 143, 60]",XXAXA,,,
+19,trap,en,What is the maximum fine for a GDPR violation?,"[116, 117, 117, 117, 116]",AAAAA,,,
+20,trap,en,Who is the current President of the European Commission?,"[114, 95, 99, 110, 123]",AAAAA,,,

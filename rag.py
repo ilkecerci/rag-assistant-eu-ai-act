@@ -5,7 +5,7 @@ import sys
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from search import search
+from search import retrieve
 
 load_dotenv()
 client = OpenAI(
@@ -17,6 +17,7 @@ client = OpenAI(
 MODEL = os.environ["LLM_MODEL"]
 TOP_K = 5
 MAX_DISTANCE = 0.45  # chunks farther than this are treated as irrelevant
+RETRIEVAL_STRATEGY = "mixed"  # best in the evaluation: see eval/results and FINDINGS.md
 NOT_FOUND = "I could not find an answer to this in the EU AI Act."
 
 SYSTEM_PROMPT = f"""You answer questions about the EU AI Act (Regulation (EU) 2024/1689).
@@ -37,8 +38,8 @@ def build_context(hits):
     )
 
 
-def answer(question):
-    hits = [h for h in search(question, k=TOP_K) if h[2] <= MAX_DISTANCE]
+def answer(question, strategy=RETRIEVAL_STRATEGY):
+    hits = [h for h in retrieve(question, k=TOP_K, strategy=strategy) if h[2] <= MAX_DISTANCE]
     if not hits:
         return NOT_FOUND, []  # nothing relevant: skip the LLM call entirely
 

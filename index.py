@@ -33,7 +33,7 @@ def build_index():
         ids=[c["id"] for c in chunks],
         embeddings=embeddings.tolist(),
         documents=[c["text"] for c in chunks],
-                metadatas=[{"page": c["page"], "section": c["section"]} for c in chunks],
+        metadatas=[{"page": c["page"], "section": c["section"]} for c in chunks],
     )
     print(f"Stored {collection.count()} chunks in '{DB_PATH}/'")
 
