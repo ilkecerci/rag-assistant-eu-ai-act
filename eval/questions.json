@@ -1,0 +1,22 @@
+[
+  {"id": 1,  "type": "in_scope", "lang": "en", "question": "Which AI practices are prohibited?", "expected": ["Article 5"]},
+  {"id": 2,  "type": "in_scope", "lang": "en", "question": "When do the prohibitions on AI practices start to apply?", "expected": ["Article 113"]},
+  {"id": 3,  "type": "in_scope", "lang": "en", "question": "What is the maximum fine for engaging in prohibited AI practices?", "expected": ["Article 99"]},
+  {"id": 4,  "type": "in_scope", "lang": "en", "question": "What must providers of high-risk AI systems do about risk management?", "expected": ["Article 9"]},
+  {"id": 5,  "type": "in_scope", "lang": "en", "question": "What requirements apply to the training data of high-risk AI systems?", "expected": ["Article 10"]},
+  {"id": 6,  "type": "in_scope", "lang": "en", "question": "What must the technical documentation of a high-risk AI system contain?", "expected": ["Article 11", "Annex IV"]},
+  {"id": 7,  "type": "in_scope", "lang": "en", "question": "How must high-risk AI systems allow for human oversight?", "expected": ["Article 14"]},
+  {"id": 8,  "type": "in_scope", "lang": "en", "question": "Must people be told that they are interacting with an AI system such as a chatbot?", "expected": ["Article 50"]},
+  {"id": 9,  "type": "in_scope", "lang": "en", "question": "What obligations do providers of general-purpose AI models have?", "expected": ["Article 53"]},
+  {"id": 10, "type": "in_scope", "lang": "en", "question": "How does the AI Act define an AI system?", "expected": ["Article 3"]},
+  {"id": 11, "type": "in_scope", "lang": "en", "question": "Which areas are listed as high-risk AI use cases?", "expected": ["Article 6", "Annex III"]},
+  {"id": 12, "type": "in_scope", "lang": "en", "question": "Who must ensure AI literacy, and what does it involve?", "expected": ["Article 4"]},
+  {"id": 13, "type": "in_scope", "lang": "en", "question": "What is an AI regulatory sandbox?", "expected": ["Article 57"]},
+  {"id": 14, "type": "in_scope", "lang": "en", "question": "When is a general-purpose AI model considered to have systemic risk?", "expected": ["Article 51"]},
+  {"id": 15, "type": "in_scope", "lang": "tr", "question": "Yüksek riskli yapay zeka sistemlerinde insan gözetimi nasıl sağlanmalı?", "expected": ["Article 14"]},
+  {"id": 16, "type": "in_scope", "lang": "tr", "question": "Deepfake içeriklerin yapay zeka ile üretildiği belirtilmek zorunda mı?", "expected": ["Article 50"]},
+  {"id": 17, "type": "in_scope", "lang": "tr", "question": "Yasaklı yapay zeka uygulamaları için en yüksek para cezası nedir?", "expected": ["Article 99"]},
+  {"id": 18, "type": "out_of_scope", "lang": "en", "question": "What is the best pizza recipe?", "expected": []},
+  {"id": 19, "type": "trap", "lang": "en", "question": "What is the maximum fine for a GDPR violation?", "expected": []},
+  {"id": 20, "type": "trap", "lang": "en", "question": "Who is the current President of the European Commission?", "expected": []}
+]

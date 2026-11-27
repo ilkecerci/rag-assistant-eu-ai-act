@@ -8,9 +8,13 @@ from openai import OpenAI
 from search import search
 
 load_dotenv()
-client = OpenAI(base_url=os.environ["LLM_BASE_URL"], api_key=os.environ["LLM_API_KEY"])
-MODEL = os.environ["LLM_MODEL"]
+client = OpenAI(
+    base_url=os.environ["LLM_BASE_URL"],
+    api_key=os.environ["LLM_API_KEY"],
+    max_retries=10,  # free tier has a tokens-per-minute limit; back off and retry on 429
+)
 
+MODEL = os.environ["LLM_MODEL"]
 TOP_K = 5
 MAX_DISTANCE = 0.45  # chunks farther than this are treated as irrelevant
 NOT_FOUND = "I could not find an answer to this in the EU AI Act."
@@ -52,6 +56,8 @@ def answer(question):
 if __name__ == "__main__":
     question = " ".join(sys.argv[1:]) or "Which AI practices are prohibited?"
     text, hits = answer(question)
-    print(f"Question: {question}\n\nAnswer:\n{text}\n\nSources:")
-    for i, (_, meta, dist) in enumerate(hits, start=1):
-        print(f"  [{i}] page {meta['page']} (distance {dist:.3f})")
+    print(f"Question: {question}\n\nAnswer:\n{text}")
+    if text.strip() != NOT_FOUND:
+        print("\nSources:")
+        for i, (_, meta, dist) in enumerate(hits, start=1):
+            print(f"  [{i}] page {meta['page']} (distance {dist:.3f})")

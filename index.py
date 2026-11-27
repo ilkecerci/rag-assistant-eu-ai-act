@@ -2,7 +2,7 @@
 import chromadb
 from sentence_transformers import SentenceTransformer
 
-from ingest import PDF_PATH, load_pdf, remove_repeated_lines, chunk_pages
+from ingest import PDF_PATH, load_pdf, remove_repeated_lines, chunk_pages, find_marker
 
 MODEL_NAME = "intfloat/multilingual-e5-base"
 DB_PATH = "chroma_db"
@@ -11,7 +11,9 @@ COLLECTION = "ai_act"
 
 def build_index():
     pages, _ = remove_repeated_lines(load_pdf(PDF_PATH))
-    chunks = chunk_pages(pages)
+    body_start = find_marker(pages, r"HAVE ADOPTED THIS REGULATION")
+    annex_start = find_marker(pages, r"\bANNEX I\b", start_page=body_start[0])
+    chunks = chunk_pages(pages, body_start, annex_start)
 
     model = SentenceTransformer(MODEL_NAME)
     # e5 models expect "passage: " before documents and "query: " before questions
@@ -31,7 +33,7 @@ def build_index():
         ids=[c["id"] for c in chunks],
         embeddings=embeddings.tolist(),
         documents=[c["text"] for c in chunks],
-        metadatas=[{"page": c["page"]} for c in chunks],
+                metadatas=[{"page": c["page"], "section": c["section"]} for c in chunks],
     )
     print(f"Stored {collection.count()} chunks in '{DB_PATH}/'")
 

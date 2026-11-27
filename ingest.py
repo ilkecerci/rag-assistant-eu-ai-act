@@ -47,8 +47,27 @@ def remove_repeated_lines(pages, min_ratio=0.3):
         cleaned.append({"page": p["page"], "text": "\n".join(kept)})
     return cleaned, repeated
 
+def find_marker(pages, pattern, start_page=1):
+    """Return (page, offset) of the first regex match at or after start_page, in whitespace-normalized text."""
+    for p in pages:
+        if p["page"] < start_page:
+            continue
+        text = " ".join(p["text"].split())
+        match = re.search(pattern, text)
+        if match:
+            return (p["page"], match.start())
+    raise ValueError(f"Marker not found: {pattern}")
 
-def chunk_pages(pages, chunk_size=1000, overlap=200):
+
+def section_of(page, offset, body_start, annex_start):
+    """Classify a position in the document; tuples compare page first, then offset."""
+    if (page, offset) < body_start:
+        return "recital"
+    if (page, offset) < annex_start:
+        return "article"
+    return "annex"
+
+def chunk_pages(pages, body_start, annex_start, chunk_size=1000, overlap=200):
     """Split each page into chunks of ~chunk_size characters, cutting only at word boundaries."""
     chunks = []
     for p in pages:
@@ -63,6 +82,7 @@ def chunk_pages(pages, chunk_size=1000, overlap=200):
             chunks.append({
                 "id": f"p{p['page']}_{start}",
                 "page": p["page"],
+                "section": section_of(p["page"], start, body_start, annex_start),
                 "text": text[start:end],
             })
             if end == len(text):
@@ -78,9 +98,12 @@ def chunk_pages(pages, chunk_size=1000, overlap=200):
 if __name__ == "__main__":
     pages = load_pdf(PDF_PATH)
     pages, removed = remove_repeated_lines(pages)
-    print(f"Removed {len(removed)} repeated lines: {sorted(removed)}")
+    body_start = find_marker(pages, r"HAVE ADOPTED THIS REGULATION")
+    annex_start = find_marker(pages, r"\bANNEX I\b", start_page=body_start[0])
+    print(f"Articles start at page {body_start[0]}, annexes at page {annex_start[0]}")
 
-    chunks = chunk_pages(pages)
+    chunks = chunk_pages(pages, body_start, annex_start)
+    print(Counter(c["section"] for c in chunks))
     lengths = [len(c["text"]) for c in chunks]
     print(f"{len(pages)} pages -> {len(chunks)} chunks")
     print(f"Chunk length: min {min(lengths)}, avg {sum(lengths) // len(lengths)}, max {max(lengths)}")
